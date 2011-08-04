@@ -4,13 +4,14 @@ LDLIBS=-lreadline
 LDFLAGS=-ggdb
 
 SOURCES=shell.c
+HEADERS=shell.h
 
 OBJECTS=$(SOURCES:.c=.o)
 
-TARGET=jbash #Jason Bourne Shell
+TARGET=shell
 
 
-.PHONY : clean run
+.PHONY : clean run package
 
 all: $(TARGET)
 
@@ -31,5 +32,6 @@ include .depend
 run: all
 	./$(TARGET) 
 clean:
-	rm $(OBJECTS) $(TARGET) 
-
+	rm $(OBJECTS) $(TARGET) $(TARGET).tar.gz
+package:
+	tar -czvf $(TARGET).tar.gz $(SOURCES) $(HEADERS) Makefile
