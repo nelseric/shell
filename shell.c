@@ -21,8 +21,6 @@ char * prompt;
 int main(int argc, char * argv[], char * env[]) {
 
 	char * buf;
-//	rl_bind_key('\t', rl_abort);
-
 	shell_init();
 	prompt = build_prompt();
 
