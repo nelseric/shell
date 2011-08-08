@@ -28,6 +28,7 @@ int main(int argc, char * argv[], char * env[]) {
         if (buf[0] != 0) {
             shell(buf);
             add_history(buf);
+            free(buf);
         }
         prompt = build_prompt();
     }
@@ -55,7 +56,7 @@ void shell(const char * cmd) {
         } else {
             if (!fork()) {
                 if (execvp(wx->we_wordv[0], wx->we_wordv) == -1) {
-                    perror("execvp");
+                    perror(wx->we_wordv[0]);
                     exit(1);
                 }
             } else {
@@ -67,15 +68,17 @@ void shell(const char * cmd) {
 
     //*/
     wordfree(wx);
+    free(wx);
 }
 
 char * build_prompt() {
     char * cwd = getcwd(NULL, 0);
     char * c = strstr(cwd, home_dir);
     if (c != NULL) {
-        char * tmp = calloc(strlen((char*) (cwd + strlen(home_dir)) + 2),
+        char * tmp = calloc(strlen((char*) (cwd + strlen(home_dir)) + 3),
                 sizeof(char));
         tmp[0] = '~';
+	tmp[1] = '\0';
         strcat(tmp, (char*) (cwd + strlen(home_dir)));
         cwd = tmp;
     }
