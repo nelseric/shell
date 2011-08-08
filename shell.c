@@ -73,7 +73,7 @@ char * build_prompt() {
 	char * cwd = getcwd(NULL, 0);
 	char * c = strstr(cwd, home_dir);
 	if (c != NULL) {
-		char * tmp = calloc(strlen((char*) (cwd + strlen(home_dir)) + 2),
+		char * tmp = calloc(1 + strlen((char*) (cwd + strlen(home_dir)) + 2),
 				sizeof(char));
 		tmp[0] = '~';
 		strcat(tmp, (char*) (cwd + strlen(home_dir)));
