@@ -92,7 +92,7 @@ void shell_init() {
     username = getenv("USER");
     home_dir = getenv("HOME");
     hostname = getenv("HOSTNAME");
-    if( strlen(hostname) == 0){
+    if( hostname == NULL){
         FILE * hostfile = fopen("/etc/hostname", "r");
         if(hostfile != NULL){
             char * hbuff = calloc(HOST_NAME_MAX + 1, sizeof(char));
