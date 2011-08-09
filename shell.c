@@ -85,8 +85,10 @@ char * build_prompt() {
 
     char * prompt = calloc(128, sizeof(char));
 
-    sprintf(prompt, "\e[1;34m%s\e[0m@\e[1;32m%s\e[0;m:\e[0;31m%s\e[0m$ ",
+    sprintf(prompt, "%s@%s:%s$ ",
             username, hostname, cwd);
+    //sprintf(prompt, "\e[1;34m%s\e[0m@\e[1;32m%s\e[0;m:\e[0;31m%s\e[0m$ ",
+    //        username, hostname, cwd);
 
     return prompt;
 }
